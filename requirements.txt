@@ -358,3 +358,4 @@ websocket-client==1.6.1
     # via jupyter-server
 jupyter_collaboration==1.0.1
 clickhouse-sqlalchemy==0.2.4
+jupysql==0.8.0

@@ -17,3 +17,4 @@ nbclassic
 nbgitpuller
 jupyter_collaboration
 clickhouse_sqlalchemy
+jupysql
