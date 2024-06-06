@@ -337,3 +337,8 @@ websocket-client==1.8.0
 jupyter_collaboration==2.1.1
 clickhouse-sqlalchemy==0.3.1
 jupysql==0.10.10
+matplotlib==3.9.0
+polars==0.20.31
+duckdb==1.0.0
+pyarrow==16.1.0
+pandas==2.2.2

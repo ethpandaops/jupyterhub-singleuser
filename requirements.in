@@ -18,3 +18,8 @@ nbgitpuller
 jupyter_collaboration
 clickhouse_sqlalchemy
 jupysql
+matplotlib
+polars
+duckdb
+pyarrow
+pandas
