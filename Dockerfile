@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.3
-# VULN_SCAN_TIME=2023-07-03_05:15:54
+# VULN_SCAN_TIME=2024-01-17_12:44:13
 
 
 # The build stage
@@ -45,8 +45,8 @@ RUN adduser \
         ${NB_USER}
 
 RUN apt-get update \
- && apt-get upgrade -y \
- && apt-get install -y --no-install-recommends \
+ && apt-get upgrade --yes \
+ && apt-get install --yes --no-install-recommends \
         ca-certificates \
         dnsutils \
         iputils-ping \
