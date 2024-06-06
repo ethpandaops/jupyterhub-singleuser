@@ -64,12 +64,9 @@ RUN --mount=type=cache,target=${PIP_CACHE_DIR} \
         --find-links=/tmp/wheels/ \
         -r /tmp/requirements.txt
 
-COPY startup.sh /usr/local/bin/startup.sh
-RUN chmod +x /usr/local/bin/startup.sh
-
 WORKDIR ${HOME}
 USER ${NB_USER}
 
 EXPOSE 8888
 ENTRYPOINT ["tini", "--"]
-CMD ["/usr/local/bin/startup.sh"]
+CMD ["jupyter", "lab"]
