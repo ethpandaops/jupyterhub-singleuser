@@ -2,6 +2,10 @@
 # VULN_SCAN_TIME=2024-01-17_12:44:13
 
 
+# The python base images ship pip 24.0, whose vendored certifi trusts the compromised
+# eMudhra CAs; each stage replaces it from this hash-pinned wheel before fetching anything.
+ARG PIP_WHEEL="pip @ https://files.pythonhosted.org/packages/3f/06/3e4420302363fbb71be3c7f35ce042f54bfca330e3e66b3a2e3c4cca579f/pip-26.2.2-py3-none-any.whl#sha256=fd7f4dfa8190e014013b9f08f3e973f4e4c26ffd179a204895533a7254813a70"
+
 # The build stage
 # ---------------
 # This stage is building Python wheels for use in later stages by using a base
@@ -10,7 +14,10 @@
 # NOTE: If the image version is updated, also update it in ci/refreeze and
 #       hub's Dockerfile!
 #
-FROM python:3.11-bullseye as build-stage
+FROM python:3.11-bookworm AS build-stage
+
+ARG PIP_WHEEL
+RUN pip install --no-cache-dir "${PIP_WHEEL}"
 
 # Build wheels
 #
@@ -30,8 +37,10 @@ RUN --mount=type=cache,target=${PIP_CACHE_DIR} \
 # The final stage
 # ---------------
 #
-FROM python:3.11-slim-bullseye
+FROM python:3.11-slim-bookworm
 ENV DEBIAN_FRONTEND=noninteractive
+ARG PIP_WHEEL
+RUN pip install --no-cache-dir "${PIP_WHEEL}"
 
 ENV NB_USER=jovyan \
     NB_UID=1000 \
